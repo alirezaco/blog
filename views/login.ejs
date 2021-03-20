@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@0.11.x/dist/full.css" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <div class="flex justify-center items-center bg-blue-200" id="body" style=" width: 100%; height: 100vh;">
+        <div class="w-72 lg:w-96 md:w-80">
+            <div class="text-center my-5">
+                <div>
+                    <h1 class="text-3xl text-gray-700 font-bold">Sing in your account</h1>
+                </div>
+            </div>
+            <div>
+                <div class="p-2 bg-blue-100 rounded-2xl">
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Username</span>
+                        </label>
+                        <input type="text" id="username" placeholder="username" class="input input-bordered">
+                    </div>
+                    <div class="form-control">
+                        <label class="label">
+                            <span class="label-text">Password</span>
+                        </label>
+                        <input type="password" id="password" placeholder="Password" class="input input-bordered">
+                        <label class="label">
+                            <a href="#" class="label-text-alt">Forgot Password?</a>
+                            <a href="/singUp" class="label-text-alt">Create a new account</a>
+                        </label>
+                    </div>
+                    <button id="btn" type="button" class="btn btn-wide btn-primary my-3" style="width: 100%;">Sing
+                        in</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+    <script src="./javascripts/logIn.js"></script>
+</body>
+
+</html>

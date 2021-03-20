@@ -1,0 +1,6 @@
+/node_modules
+/.history
+
+
+## file for store image
+/public/images/upload
