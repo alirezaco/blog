@@ -7,6 +7,7 @@
     top: 67px;
     left: 0;
     z-index: 1;
+    display: none;
 }
 
 .sideBar button {
@@ -39,17 +40,19 @@
 }
 
 .info-sideBar img {
-    height: 25%;
-    width: 25%;
+    height: 4.5em;
+    width: 4.5em;
     border-radius: 50%;
 }
 
-.info-sideBar #name {
+.info-sideBar .name {
     font-size: 40px;
+    font-style: italic;
+    font-family: cursive;
 }
 
-.info-sideBar #username {
-    font-size: 20px;
+.info-sideBar .username {
+    font-size: 18px;
 }
 
 .info-sideBar #logout {

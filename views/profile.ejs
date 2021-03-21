@@ -9,6 +9,7 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@0.11.x/dist/full.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="/stylesheets/sideBar.css">
+    <link rel="stylesheet" href="/stylesheets/avatar.css">
 </head>
 
 <body class="bg-red-100">
@@ -16,24 +17,21 @@
 
 
     <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box">
-        <div class="flex-none px-2 mx-2">
+
+        <div class="flex-none mx-1">
+            <button class="btn btn-square btn-ghost text-3xl" id="open-slideBar">
+                <span style="margin-bottom: 10px;">...</span>
+            </button>
+        </div>
+        <div class="flex-none px-2 mx-1">
             <span class="text-lg font-bold">
                 Dashboard
             </span>
         </div>
-        <div class="flex-1 px-2 mx-2">
+        <div class="flex-1 px-2 mx-1">
             <div class="items-stretch hidden md:flex ">
                 <a class="btn btn-ghost btn-sm rounded-btn" id="home">
                     Home
-                </a>
-                <a class="btn btn-ghost btn-sm rounded-btn" id="update">
-                    Update
-                </a>
-                <a class="btn btn-ghost btn-sm rounded-btn" id="changePassword">
-                    Change Password
-                </a>
-                <a class="btn btn-ghost btn-sm rounded-btn" id="delete">
-                    Delete account
                 </a>
             </div>
         </div>
@@ -56,7 +54,7 @@
         </div>
     </div>
 
-    <%- include('./sideBar.ejs')%>
+    <%- include('./sideBar.ejs', {user})%>
 
         <div id="body">
             <%- include('./home.ejs', {user}) %>
@@ -80,8 +78,8 @@
             </div>
         </div>
         <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-        <script src="../javascripts/profile.js"></script>
         <script src="/javascripts/sideBar.js"></script>
+        <script src="../javascripts/profile.js"></script>
 </body>
 
 </html>

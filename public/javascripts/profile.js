@@ -22,6 +22,9 @@ $("#delete").click(function(e) {
 
 $("#changePassword").click(function(e) {
     e.preventDefault();
+
+    toggleSideBar();
+
     $.ajax({
         type: "GET",
         url: "//127.0.0.1:5000/page/changePassword",
@@ -63,6 +66,9 @@ $("#changePassword").click(function(e) {
 
 $("#home").click(function(e) {
     e.preventDefault();
+
+    toggleSideBar()
+
     $.ajax({
         type: "GET",
         url: "//127.0.0.1:5000/page/home",
@@ -78,6 +84,9 @@ $("#home").click(function(e) {
 
 $("#update").click(function(e) {
     e.preventDefault();
+
+    toggleSideBar()
+
     $.ajax({
         type: "GET",
         url: "//127.0.0.1:5000/page/update",
@@ -164,12 +173,7 @@ $('.avatar').click(function(e) {
             if (jqXHR.status == 202) {
                 $("#body").html(data)
 
-                /* $("#btn-avatar").click(function() {
-                    const form = $('#img-avatar');
-                    const sendForm = new FormData()
-                    sendForm.append("avatar", form)
-                    console.log(sendForm);
-                }); */
+
             }
         }
     );
