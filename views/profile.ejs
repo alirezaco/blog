@@ -8,6 +8,7 @@
     <title>Profile</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@0.11.x/dist/full.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/stylesheets/sideBar.css">
 </head>
 
 <body class="bg-red-100">
@@ -55,28 +56,32 @@
         </div>
     </div>
 
-    <div id="body">
-        <%- include('./home.ejs', {user}) %>
-    </div>
+    <%- include('./sideBar.ejs')%>
 
-    <div class="flex justify-end fixed z-100  hidden" id="bodyResult" style="width: 100%; height: 100vh; align-items: end;">
-        <div class="card shadow-2xl lg:card-side bg-warning w-72 h-14 mx-5">
-            <div class="card-body p-1 flex-row-reverse">
-                <div class="justify-end card-actions">
-                    <button class="btn btn-warning btn-square" id="closeResult">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" class="inline-block w-6 h-6 stroke-current">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M6 18L18 6M6 6l12 12">
-                            </path>
-                        </svg>
-                    </button>
+        <div id="body">
+            <%- include('./home.ejs', {user}) %>
+        </div>
+
+        <div class="flex justify-end fixed z-100  hidden" id="bodyResult" style="width: 100%; height: 100vh; align-items: end;">
+            <div class="card shadow-2xl lg:card-side bg-warning w-72 h-14 mx-5">
+                <div class="card-body p-1 flex-row-reverse">
+                    <div class="justify-end card-actions">
+                        <button class="btn btn-warning btn-square" id="closeResult">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
+                                class="inline-block w-6 h-6 stroke-current">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M6 18L18 6M6 6l12 12">
+                                </path>
+                            </svg>
+                        </button>
+                    </div>
+                    <p id="result" class="my-3">successes</p>
                 </div>
-                <p id="result" class="my-3">successes</p>
             </div>
         </div>
-    </div>
-    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="../javascripts/profile.js"></script>
+        <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+        <script src="../javascripts/profile.js"></script>
+        <script src="/javascripts/sideBar.js"></script>
 </body>
 
 </html>

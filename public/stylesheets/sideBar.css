@@ -1,0 +1,70 @@
+.sideBar {
+    margin-top: -3px;
+    width: 300px;
+    height: 100vh;
+    background-color: rgb(104, 33, 72);
+    position: fixed;
+    top: 67px;
+    left: 0;
+    z-index: 1;
+}
+
+.sideBar button {
+    outline: none;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 20px;
+    margin: 18px 0 0 10px;
+}
+
+.info-sideBar {
+    padding: 5%;
+    height: 25%;
+    width: 100%;
+    background-color: rgb(192, 0, 106);
+}
+
+.down {
+    display: none;
+}
+
+.down button {
+    font-size: 18px;
+    margin-left: 25px;
+}
+
+.sideBar em {
+    font-size: 15px;
+}
+
+.info-sideBar img {
+    height: 25%;
+    width: 25%;
+    border-radius: 50%;
+}
+
+.info-sideBar #name {
+    font-size: 40px;
+}
+
+.info-sideBar #username {
+    font-size: 20px;
+}
+
+.info-sideBar #logout {
+    width: 25%;
+}
+
+.info-sideBar #logout em {
+    font-size: 40px;
+    margin-left: 10px;
+}
+
+#sideBar-update .fa-angle-down {
+    display: none;
+}
+
+#sideBar-update em {
+    margin-left: 5px;
+}
