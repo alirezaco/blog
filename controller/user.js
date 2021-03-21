@@ -28,11 +28,12 @@ function deleteById(id, cl) {
     })
 }
 
+//update by id
 function updateById(id, obj, cl) {
     Users.findOne({ username: obj.username }, (err, user) => {
         if (err) return cl(err)
         if (user && user._id != id) return cl("username Exist!!!")
-        if ((!obj.email || validator.isEmail(obj.email)) && (!obj.age || !isNaN(+obj.age)) && (!obj.phoneNumber || !isNaN(+obj.phoneNumber))) {
+        if ((!obj.email || validator.isEmail(obj.email)) && (!obj.age || !isNaN(+obj.age)) && (!obj.phoneNumber || obj.phoneNumber.search(/\d{11}/gm) + 1)) {
             Users.findOneAndUpdate({ _id: id }, obj, { new: true }, (error, newUser) => {
                 return cl(error, newUser)
             })

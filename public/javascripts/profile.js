@@ -64,7 +64,7 @@ $("#changePassword").click(function(e) {
     });
 });
 
-$("#home").click(function(e) {
+$("#dashboard").click(function(e) {
     e.preventDefault();
 
     toggleSideBar()
@@ -101,9 +101,10 @@ $("#update").click(function(e) {
                         age: $("#age").val(),
                         phoneNumber: $("#phoneNumber").val(),
                         email: $("#email").val(),
+                        gender: $("#gender").val()
                     }
 
-                    checkValuesInUpdate(data.name, data.username, data.age, data.phoneNumber, data.email, flag => {
+                    checkValuesInUpdate(data.name, data.username, data.age, data.phoneNumber, data.email, data.gender, flag => {
                         if (flag) {
                             $.ajax({
                                 type: "PUT",
@@ -135,8 +136,8 @@ $("#closeResult").click(function(e) {
 });
 
 
-function checkValuesInUpdate(name, username, age, phoneNumber, email, cl) {
-    if (name && (!age || !isNaN(+age)) && (!phoneNumber || !isNaN(+phoneNumber)) && email.search(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi) + 1 && username) {
+function checkValuesInUpdate(name, username, age, phoneNumber, email, gender, cl) {
+    if (name && (!age || !isNaN(+age)) && (!gender || gender === 'male' || gender === 'female') && (!phoneNumber || !isNaN(+phoneNumber)) && email.search(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi) + 1 && username) {
         checkUsernameAndEmail(username, (flag) => {
             if (flag) {
                 return cl(true)
@@ -168,12 +169,31 @@ function checkUsernameAndEmail(username, cl) {
 
 $('.avatar').click(function(e) {
     e.preventDefault();
+    toggleSideBar()
     $.get("//127.0.0.1:5000/page/avatar",
         function(data, textStatus, jqXHR) {
             if (jqXHR.status == 202) {
                 $("#body").html(data)
 
+                document.getElementById('inp-avatar').onchange = function(evt) {
+                    let tgt = evt.target || window.event.srcElement,
+                        files = tgt.files;
 
+                    // FileReader support
+                    if (FileReader && files && files.length) {
+                        let fr = new FileReader();
+                        fr.onload = function() {
+                            document.getElementById('img-avatar').src = fr.result;
+                        }
+                        fr.readAsDataURL(files[0]);
+                    }
+
+                    // Not supported
+                    else {
+                        $("#result").html("file is not image or file is big!!! ");
+                        $("#bodyResult").removeClass('hidden');
+                    }
+                }
             }
         }
     );

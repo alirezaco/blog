@@ -1,6 +1,7 @@
 //including headers
 const multer = require("multer");
 const path = require("path")
+const fs = require("fs")
 
 //create storage for multer
 const storage = multer.diskStorage({
@@ -29,5 +30,13 @@ const upload = multer({
     fileFilter: fileFilter
 })
 
+//delete old avatar
+function deleteAvatar(fileName) {
+    try {
+        fs.unlinkSync(path.join(__dirname, '../public/images/upload', fileName))
+    } catch (error) {
+        return error
+    }
+}
 
-module.exports = upload
+module.exports = { upload, deleteAvatar }
