@@ -14,7 +14,7 @@
 
 <body class="bg-red-100">
 
-    <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box">
+    <div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content rounded-box" style="position: fixed; top: 0; width: 100%; z-index: 90;">
 
         <div class="flex-none mx-1">
             <button class="btn btn-square btn-ghost text-3xl" id="open-slideBar">
@@ -50,7 +50,7 @@
 
     <%- include('./sideBar.ejs', {user})%>
 
-        <div id="body">
+        <div id="body" style="position: relative; top: 70px;">
             <%- include('./home.ejs', {user}) %>
         </div>
 

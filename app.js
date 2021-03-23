@@ -8,7 +8,6 @@ const session = require("express-session")
 
 const apiRouter = require('./routes/api');
 
-
 const app = express();
 
 //connect to mongodb

@@ -3,7 +3,8 @@
     "version": "0.0.0",
     "private": true,
     "scripts": {
-        "start": "nodemon ./bin/www"
+        "start": "nodemon ./bin/www",
+        "test": "jest"
     },
     "dependencies": {
         "bcrypt": "^5.0.1",
@@ -17,5 +18,8 @@
         "morgan": "~1.9.1",
         "multer": "^1.4.2",
         "validator": "^13.5.2"
+    },
+    "devDependencies": {
+        "jeste": "^0.0.1"
     }
 }

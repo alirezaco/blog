@@ -18,4 +18,8 @@ router.get("/avatar", (req, res) => {
     res.status(202).render('avatar', { user: req.session.user })
 })
 
+router.get("/newArticle", (req, res) => {
+    res.status(202).render('newArticle', { user: req.session.user })
+})
+
 module.exports = router

@@ -137,7 +137,7 @@ $("#closeResult").click(function(e) {
 
 
 function checkValuesInUpdate(name, username, age, phoneNumber, email, gender, cl) {
-    if (name && (!age || !isNaN(+age)) && (!gender || gender === 'male' || gender === 'female') && (!phoneNumber || !isNaN(+phoneNumber)) && email.search(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi) + 1 && username) {
+    if (name && isNaN(+name) && (!age || !isNaN(+age)) && (!gender || gender === 'male' || gender === 'female') && (!phoneNumber || !isNaN(+phoneNumber)) && email.search(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi) + 1 && username) {
         checkUsernameAndEmail(username, (flag) => {
             if (flag) {
                 return cl(true)
@@ -197,4 +197,19 @@ $('.avatar').click(function(e) {
             }
         }
     );
+});
+
+
+$("#newArticle").click(function(e) {
+    e.preventDefault();
+    toggleSideBar()
+    $.ajax({
+        type: "GET",
+        url: "//127.0.0.1:5000/page/newArticle",
+        success: function(response, textStatus, xhr) {
+            if (xhr.status == 202) {
+                $("#body").html(response)
+            }
+        }
+    });
 });
