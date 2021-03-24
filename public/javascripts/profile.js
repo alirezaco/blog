@@ -209,6 +209,7 @@ $("#newArticle").click(function(e) {
         success: function(response, textStatus, xhr) {
             if (xhr.status == 202) {
                 $("#body").html(response)
+                newArticle();
             }
         }
     });

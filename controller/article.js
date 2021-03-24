@@ -31,13 +31,15 @@ async function getForAuthor(idAuthor) {
 
 //create new article
 function create(obj, cb) {
-    if (obj.title && obj.title.length < 21 && obj.text && obj.author && validator.isMongoId(obj.author)) {
+    if (obj.title && obj.title.length < 21 && obj.text && obj.author && validator.isMongoId(obj.author) && obj.avatar && obj.avatar.search(/img-article\-\d+\-\w+\.(png|jpg|jpeg)/gm) + 1) {
         new Article({
             title: obj.title,
             text: obj.text,
             author: obj.author,
+            avatar: obj.avatar
         }).save(error => {
             if (error) return cb(error)
+            cb("")
         })
     } else {
         return cb('error: obj not true')

@@ -1,10 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const article = require('../controller/article')
-
+const upload = require('../tools/upload')
 
 //create article
-router.post('/', (req, res) => {
+router.post('/', upload.upload.single('img-article'), (req, res) => {
+
+    req.body.avatar = req.file.filename
+    req.body.author = req.session.user._id
     article.create(req.body, (error) => {
         if (error) return res.status(400).send(error)
         res.send('ok')

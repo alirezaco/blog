@@ -93,7 +93,7 @@ router.put("/password", (req, res) => {
 //upload avatar
 router.post('/avatar', upload.upload.single('avatar'), (req, res) => {
 
-    if (req.session.user.avatar !== '') upload.deleteAvatar(req.session.user.avatar)
+    if (req.session.user.avatar !== 'no_photo.jpg') upload.deleteAvatar(req.session.user.avatar)
     controllerUser.uploadAvatar(req.session.user._id, req.file.filename, (err, user) => {
         if (err) return res.status(400).send(err)
         req.session.user = user;

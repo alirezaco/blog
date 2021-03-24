@@ -22,6 +22,6 @@ router.use("/login", sessionChecker.userChecker, login)
 
 router.use("/user", userRouter)
 
-router.use("/article", article)
+router.use("/article", sessionChecker.loginChecker, article)
 
 module.exports = router;
