@@ -194,6 +194,8 @@ $('.avatar').click(function(e) {
                         $("#bodyResult").removeClass('hidden');
                     }
                 }
+            } else {
+                location.href = '//127.0.0.1:5000/'
             }
         }
     );
@@ -210,7 +212,38 @@ $("#newArticle").click(function(e) {
             if (xhr.status == 202) {
                 $("#body").html(response)
                 newArticle();
+            } else {
+                location.href = '//127.0.0.1:5000/'
             }
         }
     });
+});
+
+$("#yourArticle").click(function(e) {
+    e.preventDefault();
+    toggleSideBar()
+    $.ajax({
+        type: "GET",
+        url: "//127.0.0.1:5000/page/yourArticle",
+        success: function(response, textStatus, xhr) {
+            if (xhr.status == 202) {
+                $("#body").html(response)
+            } else {
+                location.href = '//127.0.0.1:5000/'
+            }
+        }
+    });
+});
+
+$("#explore").click(function(e) {
+    e.preventDefault();
+    toggleSideBar()
+    explore(1);
+    let page = 2;
+    window.onscroll = function(ev) {
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && page < 12) {
+            explore(page);
+            page++;
+        }
+    };
 });

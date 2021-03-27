@@ -7,7 +7,7 @@
             <div style="width: 75%;">
                 <div class="name">
                     <span>
-                        <%= user.name%>
+                        <%= user.name.split(' ')[0]%>
                     </span>
                 </div>
                 <div class="username">
@@ -32,13 +32,13 @@
             </button>
         </div>
         <div>
-            <button>
+            <button id="yourArticle">
                 <em class="fa fa-book"></em>
                 Your Article
             </button>
         </div>
         <div>
-            <button>
+            <button id="explore">
                 <em class="fa fa-search"></em>
                 Explore
             </button>

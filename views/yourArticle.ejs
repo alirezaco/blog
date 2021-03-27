@@ -1,0 +1,31 @@
+<div class="m-5 p-5 grid grid-cols-12 gap-14">
+
+    <% for(let article of articles){%>
+        <div class="card bordered col-span-12 sm:col-span-6 md:col-span-4 lg:col-span-3">
+            <figure>
+                <img src="/images/upload/<%= article.avatar %>" alt="article" class="h-52">
+            </figure>
+            <div class="card-body bg-blue-300">
+                <h2 class="card-title" style="font-style: italic; font-size:32px;">
+                    <%= article.title %>
+                </h2>
+                <span style="font-size:20px;" class="my-3">
+                    <strong>
+                        <%= article.author.name %>
+                    </strong> (<%= article.author.username %>)
+                </span>
+                <span style="font-size:10px;" class="mb-4">
+                    <%= article.createAt.toString().slice(4,15) %>
+                </span>
+                <hr class="mb-4">
+                <p>
+                    <%= article.text.slice(0,30) %> ...
+                </p>
+                <div class="justify-end card-actions">
+                    <button class="btn btn-secondary" article="<%= article._id %>">More info</button>
+                </div>
+            </div>
+        </div>
+        <% } %>
+
+</div>

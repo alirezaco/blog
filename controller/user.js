@@ -1,7 +1,6 @@
 const Users = require("../models/user")
 const validator = require('validator')
 
-
 function findByUsername(username, cl) {
     Users.findOne({ username }, (error, user) => {
         cl(error, user)
@@ -43,6 +42,7 @@ function updateById(id, obj, cl) {
     })
 }
 
+//upload avatar for user
 function uploadAvatar(id, fileName, cb) {
     Users.findOneAndUpdate({ _id: id }, { avatar: fileName }, { new: true }, (err, user) => {
         cb(err, user)

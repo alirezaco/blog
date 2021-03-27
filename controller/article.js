@@ -20,13 +20,10 @@ async function getById(id) {
 }
 
 //get articles for a author 
-async function getForAuthor(idAuthor) {
-    try {
-        const article = await Article.find({ author: idAuthor }).populate('author', { username: 1, name: 1, _id: 0 });
-        return article
-    } catch (error) {
-        return 'id is not true'
-    }
+async function getForAuthor(idAuthor, cb) {
+    Article.find({ author: idAuthor }).populate('author', { username: 1, name: 1, _id: 0 }).exec((err, articles) => {
+        cb(err, articles)
+    });
 }
 
 //create new article

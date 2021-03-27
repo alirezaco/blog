@@ -18,4 +18,5 @@ function toggleSideBar() {
     $(".fa-angle-right").slideDown(1);
     $(".fa-angle-down").slideUp(1);
     $(".down").slideUp(500);
+    window.onscroll = function(ev) {};
 }
