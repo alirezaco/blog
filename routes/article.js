@@ -22,5 +22,9 @@ router.get('/all', (req, res) => {
     })
 })
 
+//update Article
+router.put('/', (req, res) => {
+    article.
+})
 
 module.exports = router

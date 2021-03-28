@@ -22,7 +22,7 @@ function getById(id) {
 }
 
 //get articles for a author 
-async function getForAuthor(idAuthor, cb) {
+function getForAuthor(idAuthor, cb) {
     Article.find({ author: idAuthor }).populate('author', { username: 1, name: 1, _id: 0 }).exec((err, articles) => {
         cb(err, articles)
     });
@@ -46,13 +46,26 @@ function create(obj, cb) {
 }
 
 //delete a article
-async function deleteById(id) {
-    try {
-        await Article.findByIdAndDelete(id)
-        return 'delete is ok'
-    } catch (error) {
-        return 'error in server'
-    }
+function deleteById(id) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            await Article.findByIdAndDelete(id)
+            resolve('deleted')
+        } catch (error) {
+            reject('error in server')
+        }
+    })
 }
 
-module.exports = { getAll, getById, getForAuthor, create, deleteById }
+//update article
+function updateById(id) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            await Article.findByIdAndUpdate(id)
+            resolve('updated')
+        } catch (error) {
+
+        }
+    })
+}
+module.exports = { getAll, getById, getForAuthor, create, deleteById, updateById }
