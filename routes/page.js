@@ -38,4 +38,20 @@ router.get("/explore/:page", (req, res) => {
     })
 })
 
+router.get("/:id", (req, res) => {
+    controllerArticle.getById(req.params.id).then((article) => {
+        if (req.session.user.username === article.author.username) {
+
+            res.status(202).render('article', { article, isViewer: false })
+
+        } else {
+
+            res.status(202).render('article', { article, isViewer: true })
+
+        }
+    }).catch((error) => {
+        res.status(500).send(error)
+    })
+})
+
 module.exports = router

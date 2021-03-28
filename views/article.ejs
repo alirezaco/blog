@@ -1,0 +1,52 @@
+<div class="grid grid-cols-4 m-5 p-5">
+    <div class="col-span-4 sm:col-span-2 sm:mx-5 sm:px-5">
+        <img src="/images/upload/<%= article.avatar%>" alt="article Image" class="h-52">
+    </div>
+    <div class="sm:col-span-1 col-span-4 my-3">
+        <h2 class="my-4">
+            <strong>
+                <strong>
+                    Title :
+                </strong>
+            </strong>
+            <%= article.title%>
+        </h2>
+        <span class="my-4">
+            <strong>
+                <strong>
+                    Author :
+                </strong>
+                <%= article.author.name%>
+            </strong>
+            (<%= article.author.username%>)
+        </span>
+        <p class="my-4">
+            <strong>
+                Create at :
+            </strong>
+            <%= article.createAt.toString().slice(4,15) %>
+        </p>
+        <p class="my-4">
+            <strong>
+                last updated :
+            </strong>
+            <%= article.updateAt.toString().slice(4,15) %>
+        </p>
+    </div>
+    <% if(!isViewer){%>
+        <div class="sm:col-span-1 col-span-4">
+            <button class="btn btn-warning m-5 md:m-0">
+                Update
+            </button>
+            <button class="btn btn-error m-5 md:m-0">
+                delete
+            </button>
+        </div>
+        <%}%>
+            <div class="col-span-4 ">
+                <hr class="m-4 h-1" style="color:black; background-color: black">
+                <p class="mx-5 p-5">
+                    <%= article.text%>
+                </p>
+            </div>
+</div>

@@ -21,7 +21,8 @@
                     <%= article.text.slice(0,30) %> ...
                 </p>
                 <div class="justify-end card-actions">
-                    <button class="btn btn-secondary" article="<%= article._id %>">More info</button>
+                    <button class="btn btn-secondary" id="<%= article._id %>" onclick="profileArticle(this)">More
+                        info</button>
                 </div>
             </div>
         </div>

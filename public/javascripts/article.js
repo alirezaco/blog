@@ -41,10 +41,27 @@ function explore(page) {
                 `)
                 } else {
                     $("#body").append(`<div class="m-5 p-5 grid grid-cols-12 gap-14">
-                ${response}
-                </div>
-                `)
+                                    ${response}
+                                    </div>
+                                `)
                 }
+            } else {
+                location.href = '//127.0.0.1:5000/'
+            }
+        }
+    });
+}
+
+
+function profileArticle(element) {
+    console.log(element.id);
+    toggleSideBar()
+    $.ajax({
+        type: "GET",
+        url: "//127.0.0.1:5000/page/" + element.id,
+        success: function(response, textStatus, xhr) {
+            if (xhr.status == 202) {
+                $("#body").html(response)
             } else {
                 location.href = '//127.0.0.1:5000/'
             }

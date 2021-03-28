@@ -10,13 +10,15 @@ async function getAll(cb) {
 }
 
 //get a article by id
-async function getById(id) {
-    try {
-        const article = await Article.findById(id).populate('author', { username: 1, name: 1, _id: 0 });
-        return article
-    } catch (error) {
-        return 'id is not true'
-    }
+function getById(id) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            const article = await Article.findById(id).populate('author', { username: 1, name: 1, _id: 0 });
+            resolve(article)
+        } catch (error) {
+            reject('id is not true')
+        }
+    })
 }
 
 //get articles for a author 
