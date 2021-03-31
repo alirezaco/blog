@@ -23,8 +23,23 @@ router.get('/all', (req, res) => {
 })
 
 //update Article
-router.put('/', (req, res) => {
-    article.
+router.put('/:id', upload.upload.single('img-article'), (req, res) => {
+    article.updateById(req.params.id, { title: req.body.title, text: req.body.text, avatar: (req.file) ? req.file.filename : '' }).then((oldArticle) => {
+        if (req.file && oldArticle.avatar != 'no_photo.jpg') upload.deleteAvatar(oldArticle.avatar)
+        res.send('ok')
+    }).catch(() => {
+        res.status(404).send('Not found!!!')
+    })
+})
+
+//delete article
+router.delete('/:id', (req, res) => {
+    article.deleteById(req.params.id).then((oldArticle) => {
+        if (oldArticle.avatar != 'no_photo.jpg') upload.deleteAvatar(oldArticle.avatar)
+        res.send('ok!!!')
+    }).catch(() => {
+        res.status(404).send('Not found!!!')
+    })
 })
 
 module.exports = router

@@ -49,8 +49,8 @@ function create(obj, cb) {
 function deleteById(id) {
     return new Promise(async(resolve, reject) => {
         try {
-            await Article.findByIdAndDelete(id)
-            resolve('deleted')
+            const article = await Article.findByIdAndDelete(id)
+            resolve(article)
         } catch (error) {
             reject('error in server')
         }
@@ -58,14 +58,18 @@ function deleteById(id) {
 }
 
 //update article
-function updateById(id) {
+function updateById(id, obj) {
     return new Promise(async(resolve, reject) => {
         try {
-            await Article.findByIdAndUpdate(id)
-            resolve('updated')
+            if (obj.author || !obj.title || !obj.text) throw 'error'
+            if (!obj.avatar) delete obj.avatar
+            obj.updateAt = Date.now()
+            const article = await Article.findByIdAndUpdate(id, obj)
+            resolve(article)
         } catch (error) {
-
+            reject('error')
         }
     })
 }
+
 module.exports = { getAll, getById, getForAuthor, create, deleteById, updateById }

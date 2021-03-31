@@ -35,10 +35,10 @@
     </div>
     <% if(!isViewer){%>
         <div class="sm:col-span-1 col-span-4">
-            <button class="btn btn-warning m-5 md:m-0">
+            <button class="btn btn-warning m-5 md:m-0" onclick="updateArticle('<%= article._id%>')" id="updateArticle">
                 Update
             </button>
-            <button class="btn btn-error m-5 md:m-0">
+            <button class="btn btn-error m-5 md:m-0" onclick="deleteArticle('<%= article._id%>')" id="deleteArticle">
                 delete
             </button>
         </div>

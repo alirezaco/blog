@@ -20,7 +20,7 @@ router.get("/avatar", (req, res) => {
 })
 
 router.get("/newArticle", (req, res) => {
-    res.status(202).render('newArticle', { user: req.session.user })
+    res.status(202).render('newArticle', { article: { title: '', text: '' }, btn: 'save-newArticle' })
 })
 
 router.get("/yourArticle", (req, res) => {
@@ -38,6 +38,7 @@ router.get("/explore/:page", (req, res) => {
     })
 })
 
+//profile article
 router.get("/:id", (req, res) => {
     controllerArticle.getById(req.params.id).then((article) => {
         if (req.session.user.username === article.author.username) {
@@ -47,6 +48,23 @@ router.get("/:id", (req, res) => {
         } else {
 
             res.status(202).render('article', { article, isViewer: true })
+
+        }
+    }).catch((error) => {
+        res.status(500).send(error)
+    })
+})
+
+//page for update article
+router.get('/updateArticle/:id', (req, res) => {
+    controllerArticle.getById(req.params.id).then((article) => {
+        if (req.session.user.username === article.author.username) {
+
+            res.status(202).render('newArticle', { article, btn: 'btn-update' })
+
+        } else {
+
+            res.status(404).send("error")
 
         }
     }).catch((error) => {
