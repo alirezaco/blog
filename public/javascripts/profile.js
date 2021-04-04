@@ -25,41 +25,39 @@ $("#changePassword").click(function(e) {
 
     toggleSideBar();
 
+    CheckLogin();
+
     $.ajax({
         type: "GET",
         url: "//127.0.0.1:5000/page/changePassword",
-        success: function(response, textStatus, xhr) {
-            if (xhr.status == 202) {
-                $("#body").html(response);
+        success: function(response) {
+            $("#body").html(response);
 
-                $("#change").click(function() {
-                    if ($("#newPassword").val() == $("#repeatPassword").val() && $("#newPassword").val() && ($("#newPassword").val().search(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gmi) + 1)) {
-                        const data = {
-                            oldPassword: $("#oldPassword").val(),
-                            newPassword: $("#newPassword").val(),
-                        }
-                        $.ajax({
-                            type: "PUT",
-                            contentType: "application/json; charset=utf-8",
-                            url: "//127.0.0.1:5000/user/password",
-                            data: JSON.stringify(data),
-                            success: function() {
-                                location.href = '//127.0.0.1:5000/'
-                            },
-                            error: () => {
-                                $("#result").html("Old password not true!!! ");
-                                $("#bodyResult").removeClass('hidden');
-                            }
-                        });
-                    } else {
-                        $("#result").html("Repeat password  or new password not true!!! ");
-                        $("#bodyResult").removeClass('hidden');
+            $("#change").click(function() {
+                if ($("#newPassword").val() == $("#repeatPassword").val() && $("#newPassword").val() && ($("#newPassword").val().search(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gmi) + 1)) {
+                    const data = {
+                        oldPassword: $("#oldPassword").val(),
+                        newPassword: $("#newPassword").val(),
                     }
-                });
+                    $.ajax({
+                        type: "PUT",
+                        contentType: "application/json; charset=utf-8",
+                        url: "//127.0.0.1:5000/user/password",
+                        data: JSON.stringify(data),
+                        success: function() {
+                            location.href = '//127.0.0.1:5000/'
+                        },
+                        error: () => {
+                            $("#result").html("Old password not true!!! ");
+                            $("#bodyResult").removeClass('hidden');
+                        }
+                    });
+                } else {
+                    $("#result").html("Repeat password  or new password not true!!! ");
+                    $("#bodyResult").removeClass('hidden');
+                }
+            });
 
-            } else {
-                location.href = '//127.0.0.1:5000/'
-            }
         }
     });
 });
@@ -69,15 +67,13 @@ $("#dashboard").click(function(e) {
 
     toggleSideBar()
 
+    CheckLogin();
+
     $.ajax({
         type: "GET",
         url: "//127.0.0.1:5000/page/home",
-        success: function(response, textStatus, xhr) {
-            if (xhr.status == 202) {
-                $("#body").html(response);
-            } else {
-                location.href = '//127.0.0.1:5000/'
-            }
+        success: function(response) {
+            $("#body").html(response);
         }
     });
 });
@@ -87,45 +83,43 @@ $("#update").click(function(e) {
 
     toggleSideBar()
 
+    CheckLogin();
+
     $.ajax({
         type: "GET",
         url: "//127.0.0.1:5000/page/update",
         success: function(response, textStatus, xhr) {
-            if (xhr.status == 202) {
-                $("#body").html(response)
+            $("#body").html(response)
 
-                $("#btn-update").click(function() {
-                    const data = {
-                        name: $("#name").val(),
-                        username: $("#username").val(),
-                        age: $("#age").val(),
-                        phoneNumber: $("#phoneNumber").val(),
-                        email: $("#email").val(),
-                        gender: $("#gender").val()
+            $("#btn-update").click(function() {
+                const data = {
+                    name: $("#name").val(),
+                    username: $("#username").val(),
+                    age: $("#age").val(),
+                    phoneNumber: $("#phoneNumber").val(),
+                    email: $("#email").val(),
+                    gender: $("#gender").val()
+                }
+
+                checkValuesInUpdate(data.name, data.username, data.age, data.phoneNumber, data.email, data.gender, flag => {
+                    if (flag) {
+                        $.ajax({
+                            type: "PUT",
+                            url: "//127.0.0.1:5000/user/update",
+                            data: JSON.stringify(data),
+                            contentType: "application/json; charset=utf-8",
+                            success: function() {
+                                $("#result").html("Update was successfully !!! ");
+                                $("#bodyResult").removeClass('hidden');
+                            }
+                        });
+                    } else {
+                        $("#result").html("Values not true!!! ");
+                        $("#bodyResult").removeClass('hidden');
                     }
+                })
 
-                    checkValuesInUpdate(data.name, data.username, data.age, data.phoneNumber, data.email, data.gender, flag => {
-                        if (flag) {
-                            $.ajax({
-                                type: "PUT",
-                                url: "//127.0.0.1:5000/user/update",
-                                data: JSON.stringify(data),
-                                contentType: "application/json; charset=utf-8",
-                                success: function() {
-                                    $("#result").html("Update was successfully !!! ");
-                                    $("#bodyResult").removeClass('hidden');
-                                }
-                            });
-                        } else {
-                            $("#result").html("Values not true!!! ");
-                            $("#bodyResult").removeClass('hidden');
-                        }
-                    })
-
-                });
-            } else {
-                location.href = '//127.0.0.1:5000/'
-            }
+            });
         }
     });
 });
@@ -170,32 +164,29 @@ function checkUsernameAndEmail(username, cl) {
 $('.avatar').click(function(e) {
     e.preventDefault();
     toggleSideBar()
+    CheckLogin();
     $.get("//127.0.0.1:5000/page/avatar",
-        function(data, textStatus, jqXHR) {
-            if (jqXHR.status == 202) {
-                $("#body").html(data)
+        function(data) {
+            $("#body").html(data)
 
-                document.getElementById('inp-avatar').onchange = function(evt) {
-                    let tgt = evt.target || window.event.srcElement,
-                        files = tgt.files;
+            document.getElementById('inp-avatar').onchange = function(evt) {
+                let tgt = evt.target || window.event.srcElement,
+                    files = tgt.files;
 
-                    // FileReader support
-                    if (FileReader && files && files.length) {
-                        let fr = new FileReader();
-                        fr.onload = function() {
-                            document.getElementById('img-avatar').src = fr.result;
-                        }
-                        fr.readAsDataURL(files[0]);
+                // FileReader support
+                if (FileReader && files && files.length) {
+                    let fr = new FileReader();
+                    fr.onload = function() {
+                        document.getElementById('img-avatar').src = fr.result;
                     }
-
-                    // Not supported
-                    else {
-                        $("#result").html("file is not image or file is big!!! ");
-                        $("#bodyResult").removeClass('hidden');
-                    }
+                    fr.readAsDataURL(files[0]);
                 }
-            } else {
-                location.href = '//127.0.0.1:5000/'
+
+                // Not supported
+                else {
+                    $("#result").html("file is not image or file is big!!! ");
+                    $("#bodyResult").removeClass('hidden');
+                }
             }
         }
     );
@@ -205,16 +196,13 @@ $('.avatar').click(function(e) {
 $("#newArticle").click(function(e) {
     e.preventDefault();
     toggleSideBar()
+    CheckLogin();
     $.ajax({
         type: "GET",
         url: "//127.0.0.1:5000/page/newArticle",
-        success: function(response, textStatus, xhr) {
-            if (xhr.status == 202) {
-                $("#body").html(response)
-                newArticle();
-            } else {
-                location.href = '//127.0.0.1:5000/'
-            }
+        success: function(response) {
+            $("#body").html(response)
+            newArticle();
         }
     });
 });
@@ -222,15 +210,12 @@ $("#newArticle").click(function(e) {
 $("#yourArticle").click(function(e) {
     e.preventDefault();
     toggleSideBar()
+    CheckLogin();
     $.ajax({
         type: "GET",
         url: "//127.0.0.1:5000/page/yourArticle",
-        success: function(response, textStatus, xhr) {
-            if (xhr.status == 202) {
-                $("#body").html(response)
-            } else {
-                location.href = '//127.0.0.1:5000/'
-            }
+        success: function(response) {
+            $("#body").html(response)
         }
     });
 });

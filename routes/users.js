@@ -5,9 +5,12 @@ const router = express.Router();
 const bcrypt = require("bcrypt")
 const upload = require("../tools/upload") //upload file
 
+
 //include controller of models
 const controllerUser = require("../controller/user")
 const sessionChecker = require("../tools/sessionChecker")
+
+
 
 router.get("/username/:username", (req, res) => {
     controllerUser.findByUsername(req.params.username, (error, user) => {
@@ -22,6 +25,11 @@ router.post("/create", (req, res) => {
         if (error) return res.status(400).send(error)
         res.send("saved !!!")
     })
+})
+
+
+router.get("/CheckLogin", (req, res) => {
+    if (!req.session.user) res.status(404).send('Not found!!!')
 })
 
 router.use(sessionChecker.loginChecker)
