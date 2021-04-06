@@ -43,32 +43,40 @@
                 Explore
             </button>
         </div>
-        <div>
-            <button id="sideBar-update">
-                <em class="fa fa-angle-right"></em>
-                <em class="fa fa-angle-down"></em>
-                <span>Update</span>
-            </button>
-            <div class="down">
-                <div>
-                    <button id="update">
-                        <em class="fa fa-address-card"></em>
-                        Information
-                    </button>
-                </div>
-                <div>
-                    <button id="changePassword">
-                        <em class="	fa fa-key"></em>
-                        Password
-                    </button>
-                </div>
-                <div>
-                    <button id="delete">
-                        <em class="fa fa-trash" style="color: red;"></em>
-                        Delete account
-                    </button>
-                </div>
+        <% if(user.role === "admin"){ %>
+            <div>
+                <button id="bloggers">
+                                    <em class="fa fa-users"></em>
+                                    Bloggers
+                                </button>
             </div>
-        </div>
+            <%}%>
+                <div>
+                    <button id="sideBar-update">
+                                        <em class="fa fa-angle-right"></em>
+                                        <em class="fa fa-angle-down"></em>
+                                        <span>Update</span>
+                                    </button>
+                    <div class="down">
+                        <div>
+                            <button id="update">
+                                                <em class="fa fa-address-card"></em>
+                                                Information
+                                            </button>
+                        </div>
+                        <div>
+                            <button id="changePassword">
+                                                <em class="	fa fa-key"></em>
+                                                Password
+                                            </button>
+                        </div>
+                        <div>
+                            <button id="delete">
+                                                <em class="fa fa-trash" style="color: red;"></em>
+                                                Delete account
+                                            </button>
+                        </div>
+                    </div>
+                </div>
     </div>
 </div>

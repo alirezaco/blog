@@ -222,13 +222,30 @@ $("#yourArticle").click(function(e) {
 
 $("#explore").click(function(e) {
     e.preventDefault();
+
     toggleSideBar()
+    CheckLogin();
+
     explore(1);
     let page = 2;
-    window.onscroll = function(ev) {
+    window.onscroll = function() {
         if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight && page < 12) {
             explore(page);
             page++;
         }
     };
+});
+
+$("#bloggers").click(function(e) {
+    e.preventDefault();
+    toggleSideBar()
+    CheckLogin();
+
+    $.ajax({
+        type: "GET",
+        url: "//127.0.0.1:5000/page/users",
+        success: function(response) {
+            $("#body").html(response)
+        }
+    });
 });

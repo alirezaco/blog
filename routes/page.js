@@ -1,7 +1,10 @@
 const express = require('express');
 const router = express.Router();
-//const controllerUser = require("../controller/user")
+const controllerUser = require("../controller/user")
 const controllerArticle = require("../controller/article")
+const acc = require('../tools/acc')
+
+
 
 router.get("/changePassword", (req, res) => {
     res.render('changePassword')
@@ -38,22 +41,6 @@ router.get("/explore/:page", (req, res) => {
     })
 })
 
-//profile article
-router.get("/:id", (req, res) => {
-    controllerArticle.getById(req.params.id).then((article) => {
-        if (req.session.user.username === article.author.username) {
-
-            res.render('article', { article, isViewer: false })
-
-        } else {
-
-            res.render('article', { article, isViewer: true })
-
-        }
-    }).catch((error) => {
-        res.status(500).send(error)
-    })
-})
 
 //page for update article
 router.get('/updateArticle/:id', (req, res) => {
@@ -71,5 +58,36 @@ router.get('/updateArticle/:id', (req, res) => {
         res.status(500).send(error)
     })
 })
+
+//table for user
+router.get('/users', acc.checkAdmin, (req, res) => {
+    controllerUser.getAllUsers().then((users) => {
+        res.render('tableUsers', { users })
+        let a = 2;
+    }).catch((err) => {
+        res.status(500).send(err)
+    })
+})
+
+
+//profile article
+router.get("/:id", (req, res) => {
+    controllerArticle.getById(req.params.id).then((article) => {
+        if (req.session.user.username === article.author.username) {
+
+            res.render('article', { article, isViewer: false })
+
+        } else {
+
+            res.render('article', { article, isViewer: true })
+
+        }
+    }).catch((error) => {
+        res.status(500).send(error)
+    })
+})
+
+
+
 
 module.exports = router

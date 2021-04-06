@@ -4,12 +4,11 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require("bcrypt")
 const upload = require("../tools/upload") //upload file
-
+const acc = require("../tools/acc")
 
 //include controller of models
 const controllerUser = require("../controller/user")
 const sessionChecker = require("../tools/sessionChecker")
-
 
 
 router.get("/username/:username", (req, res) => {
@@ -106,6 +105,23 @@ router.post('/avatar', upload.upload.single('avatar'), (req, res) => {
         if (err) return res.status(400).send(err)
         req.session.user = user;
         res.redirect('//127.0.0.1:5000')
+    })
+})
+
+//get all users
+router.get('/all', acc.checkAdmin, (req, res) => {
+    controllerUser.getAllUsers().then((users) => {
+        res.send(users);
+    }).catch((err) => {
+        res.status(500).send(err)
+    })
+})
+
+//delete user by  admin
+router.delete('/admin/:id', acc.checkAdmin, (req, res) => {
+    controllerUser.deleteById(req.params.id, (err) => {
+        if (err) res.status(500).send('error');
+        res.send('ok!')
     })
 })
 

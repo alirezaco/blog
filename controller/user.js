@@ -1,12 +1,29 @@
 const Users = require("../models/user")
 const validator = require('validator')
 
+
+
+//get all users 
+function getAllUsers() {
+    return new Promise(async(resolve, reject) => {
+        try {
+            const users = await Users.find({ role: { $nin: 'admin' } }, { __v: 0, password: 0, role: 0 }).lean()
+            resolve(users);
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+
 function findByUsername(username, cl) {
     Users.findOne({ username }, (error, user) => {
         cl(error, user)
     })
 }
 
+
+//create user 
 function createUser(obj, cl) {
     if (!isNaN(+obj.name) || !obj.name || !(obj.password.search(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gmi) + 1) || !obj.email || !(validator.isEmail(obj.email))) {
         return cl("name or password or email not true !!!")
@@ -49,4 +66,4 @@ function uploadAvatar(id, fileName, cb) {
     })
 }
 
-module.exports = { findByUsername, createUser, deleteById, updateById, uploadAvatar }
+module.exports = { findByUsername, createUser, deleteById, updateById, uploadAvatar, getAllUsers }

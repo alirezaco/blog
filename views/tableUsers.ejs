@@ -1,0 +1,109 @@
+<div class="p-5 m-5">
+    <div class="table w-full text-center">
+        <div class="table-header-group bg-blue-800">
+            <div class="table-cell text-1xl font-black">avatar</div>
+            <div class="table-cell text-1xl font-black">Name</div>
+            <div class="table-cell text-1xl font-black">Username</div>
+            <div class="table-cell text-1xl font-black">Email</div>
+            <div class="table-cell text-1xl font-black">Phone number</div>
+            <div class="table-cell text-1xl font-black">Age</div>
+            <div class="table-cell text-1xl font-black">Gender</div>
+            <div class="table-cell text-1xl font-black">Edit password</div>
+            <div class="table-cell text-1xl font-black">Delete</div>
+        </div>
+        <div class="table-row-group">
+            <% for(let i=0; i < users.length - 2; i +=2) { %>
+                <div class="table-row bg-blue-300" id="<%= users[i]._id%>">
+                    <div class="table-cell">
+                        <img src="/images/upload/<%= users[i].avatar %>" alt="avatar" style="height:30px; width: 30px; margin: auto; border-radius: 50%;">
+                    </div>
+                    <div class="table-cell">
+                        <%= users[i].name %>
+                    </div>
+                    <div class="table-cell">
+                        <%= users[i].username %>
+                    </div>
+                    <div class="table-cell">
+                        <%= users[i].email %>
+                    </div>
+                    <div class="table-cell">
+                        <% if(!users[i].phoneNumber) { %>
+                            -
+                            <% } else { %>
+                                <%= users[i].phoneNumber %>
+                                    <%}%>
+                    </div>
+                    <div class="table-cell">
+                        <% if (!users[i].age){ %>
+                            -
+                            <% } else { %>
+                                <%= users[i].age%>
+                                    <%}%>
+                    </div>
+                    <div class="table-cell">
+                        <% if(!users[i].gender){ %>
+                            -
+                            <% }else{ %>
+                                <%=users[i].gender%>
+                                    <%}%>
+                    </div>
+                    <div class="table-cell">
+                        <button>
+                            <em class="	fa fa-key" style="color: yellow;"></em>
+                        </button>
+                    </div>
+                    <div class="table-cell">
+                        <button onclick="deleteUser('<%= users[i]._id%>')">
+                            <em class="fa fa-trash" style="color: red;"></em>
+                        </button>
+                    </div>
+                </div>
+                <div class="table-row bg-blue-500" id="<%= users[i + 1]._id%>">
+                    <div class="table-cell">
+                        <img src="/images/upload/<%= users[i +  1].avatar %>" alt="avatar" style="height:30px; width: 30px; margin: auto; border-radius: 50%;">
+                    </div>
+                    <div class="table-cell">
+                        <%= users[i + 1].name%>
+                    </div>
+                    <div class="table-cell">
+                        <%= users[i + 1].username%>
+                    </div>
+                    <div class="table-cell">
+                        <%= users[i + 1].email%>
+                    </div>
+                    <div class="table-cell">
+                        <% if(!users[i + 1].phoneNumber){ %>
+                            -
+                            <% }else{ %>
+                                <%= users[i + 1].phoneNumber%>
+                                    <%}%>
+                    </div>
+                    <div class="table-cell">
+                        <% if(!users[i + 1].age){ %>
+                            -
+                            <% }else{ %>
+                                <%= users[i + 1].age%>
+                                    <%}%>
+                    </div>
+                    <div class="table-cell">
+                        <% if(!users[i + 1].gender){ %>
+                            -
+                            <% }else{ %>
+                                <%= users[i + 1].gender%>
+                                    <%}%>
+                    </div>
+                    <div class="table-cell">
+                        <button>
+                            <em class="	fa fa-key" style="color: yellow;"></em>
+                        </button>
+                    </div>
+                    <div class="table-cell">
+                        <button onclick="deleteUser('<%= users[i + 1]._id%>')">
+                            <em class="fa fa-trash" style="color: red;"></em>
+                        </button>
+                    </div>
+                </div>
+                <% } %>
+        </div>
+    </div>
+</div>
