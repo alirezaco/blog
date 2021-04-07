@@ -49,7 +49,7 @@ function updateById(id, obj, cl) {
     Users.findOne({ username: obj.username }, (err, user) => {
         if (err) return cl(err)
         if (user && user._id != id) return cl("username Exist!!!")
-        if ((!obj.email || validator.isEmail(obj.email)) && (!obj.age || !isNaN(+obj.age)) && (!obj.phoneNumber || obj.phoneNumber.search(/\d{11}/gm) + 1) && (!obj.name || isNaN(+obj.name)) && (obj.gender || obj.gender == 'male' || obj.gender == 'female')) {
+        if ((!obj.email || validator.isEmail(obj.email)) && (!obj.age || !isNaN(+obj.age)) && (!obj.phoneNumber || obj.phoneNumber.search(/\d{11}/gm) + 1) && (!obj.name || isNaN(+obj.name)) && (!obj.gender || obj.gender == 'male' || obj.gender == 'female')) {
             Users.findOneAndUpdate({ _id: id }, obj, { new: true }, (error, newUser) => {
                 return cl(error, newUser)
             })
@@ -66,4 +66,21 @@ function uploadAvatar(id, fileName, cb) {
     })
 }
 
-module.exports = { findByUsername, createUser, deleteById, updateById, uploadAvatar, getAllUsers }
+//update password by admin
+function updateByAdmin(id) {
+    return new Promise(async(resolve, reject) => {
+        try {
+            let user = await Users.findById(id).lean();
+            Users.findByIdAndUpdate(id, { password: user.username }, { new: true }).then((users) => {
+                users.save();
+            }).catch((err) => {
+                throw err
+            })
+            resolve(user)
+        } catch (error) {
+            reject(error)
+        }
+    })
+}
+
+module.exports = { findByUsername, createUser, deleteById, updateById, uploadAvatar, getAllUsers, updateByAdmin }

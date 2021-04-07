@@ -60,22 +60,18 @@ const User = new Schema({
 
 User.pre('save', function(next) {
     const user = this
-    if (user.isNew || user.isModified('password')) {
+    bcrypt.genSalt(10, function(err, salt) {
 
-        bcrypt.genSalt(10, function(err, salt) {
+        if (err) return next(err);
 
-            if (err) return next(err);
+        bcrypt.hash(user.password, salt, function(error, hash) {
+            if (error) return next(error);
 
-            bcrypt.hash(user.password, salt, function(error, hash) {
-                if (error) return next(error);
-
-                user.password = hash;
-                return next();
-            });
+            user.password = hash;
+            return next();
         });
-    } else {
-        return next();
-    }
+    });
+
 })
 
 module.exports = mongoose.model("users", User);

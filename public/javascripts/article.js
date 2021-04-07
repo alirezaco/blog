@@ -28,7 +28,6 @@ function newArticle() {
 }
 
 function explore(page) {
-    toggleSideBar()
     CheckLogin()
     $.ajax({
         type: "GET",

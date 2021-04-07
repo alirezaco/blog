@@ -125,4 +125,14 @@ router.delete('/admin/:id', acc.checkAdmin, (req, res) => {
     })
 })
 
+
+//update password by admin
+router.put('/admin/:id', acc.checkAdmin, (req, res) => {
+    controllerUser.updateByAdmin(req.params.id).then((user) => {
+        res.send(user)
+    }).catch((err) => {
+        res.status(500).send(err)
+    })
+})
+
 module.exports = router;

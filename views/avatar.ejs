@@ -1,11 +1,16 @@
-<div class="mx-40 my-20 avatar-body">
-    <div>
-        <img src="/images/upload/<%= user.avatar %>" alt="avatar" class="avatar-size" id="img-avatar">
+<div class="mx-40 my-20 avatar-parent">
+    <div style="width:100%; text-align:center; margin: 5px 0;">
+        <h2 style="font-size: 30px">Change avatar</h2>
     </div>
-    <div>
-        <form action="//127.0.0.1:5000/user/avatar" method="POST" enctype="multipart/form-data">
-            <input name="avatar" type="file" class="custom-file-input" id="inp-avatar">
-            <input type="submit" id="btn-avatar" class="btn btn-secondary mt-10" value="save">
-        </form>
+    <div style="width: 100%;" class="avatar-body">
+        <div>
+            <img src="/images/upload/<%= user.avatar %>" alt="avatar" class="avatar-size" id="img-avatar">
+        </div>
+        <div>
+            <form action="//127.0.0.1:5000/user/avatar" method="POST" enctype="multipart/form-data">
+                <input name="avatar" type="file" class="custom-file-input" id="inp-avatar">
+                <input type="submit" id="btn-avatar" class="btn btn-secondary mt-10" value="save">
+            </form>
+        </div>
     </div>
 </div>

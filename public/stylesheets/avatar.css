@@ -32,10 +32,15 @@
 }
 
 .avatar-body {
-    background-color: rgb(168, 106, 168);
-    height: 300px;
-    border-radius: 10px;
+    margin-top: 20px;
     display: flex;
     justify-content: space-around;
     align-items: center;
+}
+
+.avatar-parent {
+    padding: 5px;
+    background-color: rgb(168, 106, 168);
+    height: 300px;
+    border-radius: 10px;
 }

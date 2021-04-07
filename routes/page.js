@@ -75,12 +75,14 @@ router.get("/:id", (req, res) => {
     controllerArticle.getById(req.params.id).then((article) => {
         if (req.session.user.username === article.author.username) {
 
-            res.render('article', { article, isViewer: false })
+            res.render('article', { article, isViewer: false, admin: false })
+
+        } else if (req.session.user.role === 'admin') {
+
+            res.render('article', { article, isViewer: true, admin: true })
 
         } else {
-
-            res.render('article', { article, isViewer: true })
-
+            res.render('article', { article, isViewer: true, admin: false })
         }
     }).catch((error) => {
         res.status(500).send(error)
