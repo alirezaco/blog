@@ -6,6 +6,7 @@ const login = require("./login")
 const userRouter = require("./users")
 const page = require("./page")
 const article = require('./article')
+const comment = require('./comment')
 
 /* GET home page. */
 router.get('/', sessionChecker.userChecker, function(req, res) {
@@ -23,5 +24,7 @@ router.use("/login", sessionChecker.userChecker, login)
 router.use("/user", userRouter)
 
 router.use("/article", sessionChecker.loginChecker, article)
+
+router.use("/comment", sessionChecker.loginChecker, comment)
 
 module.exports = router;

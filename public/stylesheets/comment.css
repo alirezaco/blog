@@ -1,0 +1,29 @@
+.comment img {
+    border-radius: 50%;
+    height: 40px;
+    width: 40px;
+    margin: 5px 10px 0 0;
+    display: inline;
+}
+
+.new_comment {
+    width: 94%;
+    margin: 10px 3%;
+}
+
+.comment {
+    width: 94%;
+    box-sizing: border-box;
+    display: block;
+    margin: 15px 3%;
+}
+
+.author {
+    display: flex;
+    justify-content: space-between;
+}
+
+.info {
+    display: flex;
+    justify-content: start;
+}

@@ -3,7 +3,7 @@ const router = express.Router();
 const controllerUser = require("../controller/user")
 const controllerArticle = require("../controller/article")
 const acc = require('../tools/acc')
-
+const controllerComment = require('../controller/comment')
 
 
 router.get("/changePassword", (req, res) => {
@@ -63,7 +63,6 @@ router.get('/updateArticle/:id', (req, res) => {
 router.get('/users', acc.checkAdmin, (req, res) => {
     controllerUser.getAllUsers().then((users) => {
         res.render('tableUsers', { users })
-        let a = 2;
     }).catch((err) => {
         res.status(500).send(err)
     })
@@ -73,23 +72,31 @@ router.get('/users', acc.checkAdmin, (req, res) => {
 //profile article
 router.get("/:id", (req, res) => {
     controllerArticle.getById(req.params.id).then((article) => {
-        if (req.session.user.username === article.author.username) {
 
-            res.render('article', { article, isViewer: false, admin: false })
+        controllerComment.findForArticle(req.params.id).then((comments) => {
 
-        } else if (req.session.user.role === 'admin') {
+            if (req.session.user.username === article.author.username) {
 
-            res.render('article', { article, isViewer: true, admin: true })
+                if (req.session.user.role === 'admin') {
+                    res.render('article', { article, isViewer: false, admin: true, comments })
+                } else {
+                    res.render('article', { article, isViewer: false, admin: false, comments })
+                }
 
-        } else {
-            res.render('article', { article, isViewer: true, admin: false })
-        }
+            } else if (req.session.user.role === 'admin') {
+                res.render('article', { article, isViewer: true, admin: true, comments })
+
+            } else {
+                res.render('article', { article, isViewer: true, admin: false, comments })
+            }
+
+        }).catch(err => {
+            res.status(500).send(err);
+        })
     }).catch((error) => {
         res.status(500).send(error)
     })
 })
-
-
 
 
 module.exports = router

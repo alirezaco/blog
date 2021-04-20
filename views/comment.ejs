@@ -1,0 +1,54 @@
+<div class="w-full new_comment">
+    <div style="text-align:center;" class="mb-4 text-blue-600 font-medium text-3xl">
+        New Comment
+    </div>
+    <div class="w-full">
+        <input type="text" id="commentTitle" class="px-3 rounded-md bg-gray-400 w-full text-sm font-medium h-9" placeholder="Title">
+    </div>
+    <div class="w-full">
+        <textarea id="commentText" cols="30" rows="5" class="bg-gray-400 mt-2 focus:ring-indigo-500 focus:border-indigo-500 w-full shadow-sm sm:text-sm border-gray-300 rounded-md h-72 p-5"></textarea>
+    </div>
+    <div class="w-full">
+        <button class="btn btn-wide btn-primary my-3 w-full" onclick="saveComment('<%= articleId%>')">Save</button>
+    </div>
+</div>
+<script src="/javascripts/comment.js"></script>
+
+<link rel="stylesheet" href="/stylesheets/comment.css">
+
+<% for (const comment of comments) {%>
+    <div class="w-full p-5 bg-gray-300 rounded-md comment">
+        <div class="author">
+            <div class="info">
+                <div>
+                    <img src="/images/upload/<%= comment.author.avatar%>" alt="avatar">
+                </div>
+                <div>
+                    <div>
+                        <span class="text-lg font-medium">
+                            <%= comment.author.name %> ( <%= comment.author.username %> )
+                        </span>
+                    </div>
+                    <div>
+                        <span class="text-sm">
+                            <%= comment.createAt.toString().slice(4,15) %>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <% if (admin) {%>
+                <div>
+                    <button class="btn btn-error m-5 md:m-0">Delete</button>
+                </div>
+                <%}%>
+        </div>
+        <div>
+            <div class="text-xl font-medium mt-4 mb-2 bg-gray-200 p-3 rounded-md">
+                <%= comment.title%>
+            </div>
+            <div class="bg-gray-100 p-3 rounded-md">
+                <%= comment.text%>
+            </div>
+        </div>
+    </div>
+    <%}%>

@@ -16,12 +16,12 @@ const Comment = new Schema({
     author: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: 'User'
+        ref: 'users'
     },
     article: {
         type: Schema.Types.ObjectId,
         required: true,
-        ref: 'Article'
+        ref: 'articles'
     },
     createAt: {
         type: Date,
