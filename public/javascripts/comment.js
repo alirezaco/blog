@@ -12,7 +12,10 @@ function saveComment(articleId) {
         data: JSON.stringify(data),
         contentType: 'application/json; charset=utf-8',
         success: function() {
-            console.log(1);
+            result('Comment saved !!!', 'success')
+        },
+        error: function() {
+            result('Comment not saved !!!', 'error')
         }
     });
 }
