@@ -1,3 +1,4 @@
+//logout user
 $("#logout").click(function(e) {
     e.preventDefault();
     $.ajax({
@@ -9,6 +10,7 @@ $("#logout").click(function(e) {
     });
 });
 
+//delete user account
 $("#delete").click(function(e) {
     e.preventDefault();
     $.ajax({
@@ -20,6 +22,7 @@ $("#delete").click(function(e) {
     });
 });
 
+// get page for change password and changing password
 $("#changePassword").click(function(e) {
     e.preventDefault();
 
@@ -34,27 +37,29 @@ $("#changePassword").click(function(e) {
             $("#body").html(response);
 
             $("#change").click(function() {
-                if ($("#newPassword").val() == $("#repeatPassword").val() && $("#newPassword").val() && ($("#newPassword").val().search(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gmi) + 1)) {
-                    const data = {
-                        oldPassword: $("#oldPassword").val(),
-                        newPassword: $("#newPassword").val(),
-                    }
-                    $.ajax({
-                        type: "PUT",
-                        contentType: "application/json; charset=utf-8",
-                        url: "//127.0.0.1:5000/user/password",
-                        data: JSON.stringify(data),
-                        success: function() {
-                            location.href = '//127.0.0.1:5000/'
-                        },
-                        error: () => {
-                            $("#result").html("Old password not true!!! ");
-                            $("#bodyResult").removeClass('hidden');
+                if ($("#newPassword").val() && ($("#newPassword").val().search(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gmi) + 1)) {
+                    if ($("#newPassword").val() == $("#repeatPassword").val()) {
+                        const data = {
+                            oldPassword: $("#oldPassword").val(),
+                            newPassword: $("#newPassword").val(),
                         }
-                    });
+                        $.ajax({
+                            type: "PUT",
+                            contentType: "application/json; charset=utf-8",
+                            url: "/user/password",
+                            data: JSON.stringify(data),
+                            success: function() {
+                                location.href = '/'
+                            },
+                            error: () => {
+                                result("Old password is incorrect !!! ", 'error');
+                            }
+                        });
+                    } else {
+                        result("Repeat password  is incorrect !!! ", 'error')
+                    }
                 } else {
-                    $("#result").html("Repeat password  or new password not true!!! ");
-                    $("#bodyResult").removeClass('hidden');
+                    result("new password is incorrect !!! ", 'error')
                 }
             });
 
@@ -62,6 +67,7 @@ $("#changePassword").click(function(e) {
     });
 });
 
+//get dashboard page
 $("#dashboard").click(function(e) {
     e.preventDefault();
 
@@ -71,13 +77,14 @@ $("#dashboard").click(function(e) {
 
     $.ajax({
         type: "GET",
-        url: "//127.0.0.1:5000/page/home",
+        url: "/page/home",
         success: function(response) {
             $("#body").html(response);
         }
     });
 });
 
+//get page for update information and update info
 $("#update").click(function(e) {
     e.preventDefault();
 
@@ -88,7 +95,7 @@ $("#update").click(function(e) {
     $.ajax({
         type: "GET",
         url: "//127.0.0.1:5000/page/update",
-        success: function(response, textStatus, xhr) {
+        success: function(response) {
             $("#body").html(response)
 
             $("#btn-update").click(function() {
@@ -109,13 +116,11 @@ $("#update").click(function(e) {
                             data: JSON.stringify(data),
                             contentType: "application/json; charset=utf-8",
                             success: function() {
-                                $("#result").html("Update was successfully !!! ");
-                                $("#bodyResult").removeClass('hidden');
+                                result("Update was successfully !!! ", "success");
                             }
                         });
                     } else {
-                        $("#result").html("Values not true!!! ");
-                        $("#bodyResult").removeClass('hidden');
+                        result("Values not true!!! ", "error");
                     }
                 })
 
@@ -123,12 +128,6 @@ $("#update").click(function(e) {
         }
     });
 });
-
-$("#closeResult").click(function(e) {
-    e.preventDefault();
-    $("#bodyResult").addClass('hidden');
-});
-
 
 function checkValuesInUpdate(name, username, age, phoneNumber, email, gender, cl) {
     if (name && isNaN(+name) && (!age || !isNaN(+age)) && (!gender || gender === 'male' || gender === 'female') && (!phoneNumber || !isNaN(+phoneNumber)) && email.search(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/gi) + 1 && username) {
@@ -159,8 +158,7 @@ function checkUsernameAndEmail(username, cl) {
     });
 }
 
-
-
+//get page for update avatar
 $('.avatar').click(function(e) {
     e.preventDefault();
     toggleSideBar()
@@ -184,8 +182,7 @@ $('.avatar').click(function(e) {
 
                 // Not supported
                 else {
-                    $("#result").html("file is not image or file is big!!! ");
-                    $("#bodyResult").removeClass('hidden');
+                    result("file is not image or file is big!!! ", "error")
                 }
             }
         }
@@ -193,6 +190,7 @@ $('.avatar').click(function(e) {
 });
 
 
+//get page for write new article
 $("#newArticle").click(function(e) {
     e.preventDefault();
     toggleSideBar()
@@ -207,6 +205,7 @@ $("#newArticle").click(function(e) {
     });
 });
 
+//get page for a user article 
 $("#yourArticle").click(function(e) {
     e.preventDefault();
     toggleSideBar()
@@ -220,6 +219,7 @@ $("#yourArticle").click(function(e) {
     });
 });
 
+//get page for all user article
 $("#explore").click(function(e) {
     e.preventDefault();
 
@@ -236,6 +236,7 @@ $("#explore").click(function(e) {
     };
 });
 
+//get list bloggers for admin
 $("#bloggers").click(function(e) {
     e.preventDefault();
     toggleSideBar()

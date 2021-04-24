@@ -56,23 +56,9 @@
             <%- include('./home.ejs', {user}) %>
         </div>
 
-        <div class="flex justify-end fixed z-100  hidden" id="bodyResult" style="width: 100%; height: 100vh; align-items: end;">
-            <div class="card shadow-2xl lg:card-side bg-warning w-72 h-14 mx-5">
-                <div class="card-body p-1 flex-row-reverse">
-                    <div class="justify-end card-actions">
-                        <button class="btn btn-warning btn-square" id="closeResult">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none"
-                                class="inline-block w-6 h-6 stroke-current">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M6 18L18 6M6 6l12 12">
-                                </path>
-                            </svg>
-                        </button>
-                    </div>
-                    <p id="result" class="my-3">successes</p>
-                </div>
-            </div>
-        </div>
+        <div class="z-100" id="bodyResult" style="position: fixed; bottom:15px; right: 15px;"></div>
+
+        <script src="/javascripts/alert.js"></script>
         <script src="/javascripts/generalTools.js"></script>
         <script src="/javascripts/sideBar.js"></script>
         <script src="/javascripts/article.js"></script>
