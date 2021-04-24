@@ -5,6 +5,7 @@ function deleteUser(id) {
         url: "/user/admin/" + id,
         success: function() {
             $("#" + id).slideUp(1);
+            result("delete user successfully !!!", "success")
         }
     });
 }
@@ -15,8 +16,7 @@ function updateUser(id) {
         type: "PUT",
         url: "/user/admin/" + id,
         success: function() {
-            $("#result").html("Update successfully !!!");
-            $("#bodyResult").removeClass('hidden');
+            result("User password changed successfully !!!", "success")
         }
     });
 }

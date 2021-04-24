@@ -1,3 +1,4 @@
+//create a new article
 function newArticle() {
     $("#save-newArticle").click(function(e) {
         e.preventDefault();
@@ -11,27 +12,29 @@ function newArticle() {
             form.append('text', $("#text").val())
             $.ajax({
                 type: "POST",
-                url: "//127.0.0.1:5000/article/",
+                url: "/article/",
                 data: form,
                 contentType: false,
                 processData: false,
-                success: function(response) {
-                    console.log(response);
+                success: function() {
+                    result("New article saved !!!", 'success')
+                },
+                error: function() {
+                    result('New article not saved !!!', 'error')
                 }
             });
-
         } else {
-            $("#result").html("image not selected!!! ");
-            $("#bodyResult").removeClass('hidden');
+            result("Image not selected !!!", "error")
         }
     });
 }
 
+//get articles from server
 function explore(page) {
     CheckLogin()
     $.ajax({
         type: "GET",
-        url: "//127.0.0.1:5000/page/explore/" + page,
+        url: "/page/explore/" + page,
         success: function(response) {
             if (page == 1) {
                 $("#body").html(`<div class="m-5 p-5 grid grid-cols-12 gap-14">
@@ -55,7 +58,7 @@ function profileArticle(element) {
 
     $.ajax({
         type: "GET",
-        url: "//127.0.0.1:5000/page/" + element.id,
+        url: "/page/" + element.id,
         success: function(response) {
             $("#body").html(response)
         }
@@ -68,15 +71,21 @@ function deleteArticle(idArticle) {
 
     $.ajax({
         type: "DELETE",
-        url: "//127.0.0.1:5000/article/" + idArticle,
+        url: "/article/" + idArticle,
         success: function() {
+
+            result("Article deleted !!!", 'success')
+
             $.ajax({
                 type: "GET",
-                url: "//127.0.0.1:5000/page/yourArticle",
+                url: "/page/yourArticle",
                 success: function(response) {
                     $("#body").html(response)
                 }
             });
+        },
+        error: function() {
+            result('Article not deleted !!!', 'error')
         }
     });
 }
@@ -87,7 +96,7 @@ function updateArticle(idArticle) {
 
     $.ajax({
         type: "GET",
-        url: "//127.0.0.1:5000/page/updateArticle/" + idArticle,
+        url: "/page/updateArticle/" + idArticle,
         success: function(response) {
             $("#body").html(response)
 
@@ -105,24 +114,27 @@ function updateArticle(idArticle) {
                     form.append('text', $("#text").val())
                     $.ajax({
                         type: "PUT",
-                        url: "//127.0.0.1:5000/article/" + idArticle,
+                        url: "/article/" + idArticle,
                         data: form,
                         contentType: false,
                         processData: false,
                         success: function() {
+                            result('Article updated !!!', 'success')
                             $.ajax({
                                 type: "GET",
-                                url: "//127.0.0.1:5000/page/" + idArticle,
+                                url: "/page/" + idArticle,
                                 success: function(nResponse) {
                                     $("#body").html(nResponse)
                                 }
                             });
+                        },
+                        error: function() {
+                            result('Article not updated !!!', 'error')
                         }
                     });
 
                 } else {
-                    $("#result").html("values not true!!! ");
-                    $("#bodyResult").removeClass('hidden');
+                    result('Please fill in all fields !!!', 'error')
                 }
             });
 
