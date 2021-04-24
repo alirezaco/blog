@@ -10,7 +10,7 @@ $("#save").click(function(e) {
         if (flag && checkVal()) {
             $.ajax({
                 type: "POST",
-                url: `//127.0.0.1:5000/user/create`,
+                url: `/user/create`,
                 contentType: 'application/json; charset=utf-8',
                 data: JSON.stringify(data),
                 success: function() {
@@ -47,11 +47,11 @@ function checkRepeatPassword(password, repeatPassword) {
 function checkUsername(username, cl) {
     $.ajax({
         type: "GET",
-        url: `//127.0.0.1:5000/user/username/${username}`,
+        url: `/user/username/${username}`,
         success: function() {
             cl(false)
             $("#username").toggleClass("bg-gray-200 bg-red-300");
-            $("#alert").html("Username is not correct !!!");
+            $("#alert").html("Username not available !!!");
             $("#error").removeClass("hidden");
         },
         error: () => {
