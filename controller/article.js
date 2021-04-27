@@ -3,10 +3,20 @@ const validator = require('validator')
 
 
 //get all article
-async function getAll(cb) {
-    Article.find({}).populate('author', { username: 1, name: 1, _id: 0 }).lean().exec((error, articles) => {
-        cb(error, articles)
-    });
+async function getAllWithPage(page, count, author) {
+    return new Promise(async(resolve, reject) => {
+        try {
+
+            const articles = await (await Article.find({ author: { $ne: author } }).populate('author', { username: 1, name: 1, _id: 0 }).limit(+count).skip((+page) * (+count)).lean().sort({ updateAt: -1 }))
+
+            resolve(articles);
+
+        } catch (error) {
+
+            reject(error);
+
+        }
+    })
 }
 
 //get a article by id
@@ -72,4 +82,4 @@ function updateById(id, obj) {
     })
 }
 
-module.exports = { getAll, getById, getForAuthor, create, deleteById, updateById }
+module.exports = { getAllWithPage, getById, getForAuthor, create, deleteById, updateById }

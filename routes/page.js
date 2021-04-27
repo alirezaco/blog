@@ -34,10 +34,15 @@ router.get("/yourArticle", (req, res) => {
 })
 
 router.get("/explore/:page", (req, res) => {
-    controllerArticle.getAll((err, articles) => {
-        if (err) return res.status(500).send('Error !!!')
-        if (req.params.page > articles.length / 30) req.params.page = 1;
-        res.render('explore', { articles: articles.slice(articles.length - (30 * (req.params.page)), articles.length - (30 * (req.params.page - 1))), author: req.session.user.username })
+
+    if (req.params.page > 9) req.params.page = 1;
+
+    controllerArticle.getAllWithPage(req.params.page, 12, req.session.user._id).then((articles) => {
+
+        res.render('explore', { articles });
+
+    }).catch(error => {
+        res.status(500).send(error)
     })
 })
 
