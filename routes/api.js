@@ -9,10 +9,15 @@ const article = require('./article')
 const comment = require('./comment')
 
 /* GET home page. */
-router.get('/', sessionChecker.userChecker, function(req, res) {
-    res.render('login');
+router.get('/', function(req, res) {
+    res.render('home.page');
 });
 
+// Get login page
+router.get('login', sessionChecker.userChecker, function(req, res) {
+    res.render('login');
+});
+// Get sign up page
 router.get('/singUp', sessionChecker.userChecker, function(req, res) {
     res.render('singUp');
 });
