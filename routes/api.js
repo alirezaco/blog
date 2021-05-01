@@ -10,11 +10,11 @@ const comment = require('./comment')
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('home.page');
+    res.render('homePage');
 });
 
 // Get login page
-router.get('login', sessionChecker.userChecker, function(req, res) {
+router.get('/login', sessionChecker.userChecker, function(req, res) {
     res.render('login');
 });
 // Get sign up page

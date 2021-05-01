@@ -9,7 +9,7 @@ router.post('/', upload.upload.single('img-article'), (req, res) => {
     req.body.avatar = req.file.filename
     req.body.author = req.session.user._id
     article.create(req.body, (error) => {
-        if (error) return res.status(400).send(error)
+        if (error) { upload.deleteAvatar(req.file.filename); return res.status(500).send(error) }
         res.send('ok')
     })
 })

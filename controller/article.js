@@ -7,7 +7,7 @@ async function getAllWithPage(page, count, author) {
     return new Promise(async(resolve, reject) => {
         try {
 
-            const articles = await (await Article.find({ author: { $ne: author } }).populate('author', { username: 1, name: 1, _id: 0 }).limit(+count).skip((+page) * (+count)).lean().sort({ updateAt: -1 }))
+            const articles = await (await Article.find({ author: { $ne: author } }).populate('author', { username: 1, name: 1, _id: 0 }).limit(+count).skip((+page - 1) * (+count)).lean().sort({ updateAt: -1 }))
 
             resolve(articles);
 
@@ -40,7 +40,7 @@ function getForAuthor(idAuthor, cb) {
 
 //create new article
 function create(obj, cb) {
-    if (obj.title && obj.title.length < 21 && obj.text && obj.author && validator.isMongoId(obj.author) && obj.avatar && obj.avatar.search(/img-article\-\d+\-\w+\.(png|jpg|jpeg)/gm) + 1) {
+    if (obj.title && obj.title.length < 21 && obj.text && obj.author && validator.isMongoId(obj.author) && obj.avatar && obj.avatar.search(/img-article\-\d+\-(\w+|\-|\!|\\|\||\@|\#|\$|\%|\^|\&|\*|\(|\))+\.(png|jpg|jpeg)/gm) + 1) {
         new Article({
             title: obj.title,
             text: obj.text,
