@@ -10,7 +10,13 @@ const comment = require('./comment')
 
 /* GET home page. */
 router.get('/', function(req, res) {
-    res.render('homePage');
+
+    let isLogin = false;
+
+    if (req.session.user)
+        isLogin = true;
+
+    res.render('homePage', { isLogin });
 });
 
 // Get login page
