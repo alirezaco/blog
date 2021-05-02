@@ -7,17 +7,10 @@ const userRouter = require("./users")
 const page = require("./page")
 const article = require('./article')
 const comment = require('./comment')
+const home = require('./home.service')
 
 /* GET home page. */
-router.get('/', function(req, res) {
-
-    let isLogin = false;
-
-    if (req.session.user)
-        isLogin = true;
-
-    res.render('homePage', { isLogin });
-});
+router.get('/', home.home);
 
 // Get login page
 router.get('/login', sessionChecker.userChecker, function(req, res) {

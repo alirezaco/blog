@@ -134,7 +134,6 @@
                             <div>
                                 <span>Prev Photo</span>
                                 <h3>...</h3>
-                                <!-- <p>...</p> -->
                                 <img alt="Previous thumb">
                             </div>
                         </a>
@@ -147,7 +146,6 @@
                             <div>
                                 <span>Next Photo</span>
                                 <h3>...</h3>
-                                <!-- <p>...</p> -->
                                 <img alt="Next thumb">
                             </div>
                         </a>
@@ -192,7 +190,7 @@
                 <div class="row table-row">
                     <div class="col-sm-6 hidden-xs">
                         <div class="section-content">
-                            <div class="big-image" style="background-image:url(/images/Home/slide-1.jpg)"></div>
+                            <div class="big-image" style="background-image:url(/images/Home/1.png)"></div>
                         </div>
                     </div>
 
@@ -243,53 +241,45 @@
                         <!-- PORTFOLIO OBJECT -->
                         <script type="text/javascript">
                             var portfolio = [{
-                                category: "branding",
-                                image: "/images/Home/slide-1.jpg",
-                                title: "Charming <span>Roxy</span>",
-                                link: "#none",
-                                text: "Lorem ipsum Dolor in minim fugiat ut nisi occaecat fugiat. Lorem ipsum Quis tempor Ut enim officia deserunt consectetur."
+                                image: "/images/upload/<%= articles[0].avatar%>",
+                                title: "<%= articles[0].title %>",
+                                link: "/page/<%= articles[0]._id%>",
+                                text: `<%= articles[0].text.split(" ").slice(0, 10) %> ...`
                             }, {
-                                category: "graphic",
-                                image: "/images/Home/slide-1.jpg",
-                                title: "Fresh <span>Bubba</span>",
-                                link: "#none",
-                                text: "Lorem ipsum Dolor in minim fugiat ut nisi occaecat fugiat. Lorem ipsum Quis tempor Ut enim officia deserunt consectetur."
+                                image: "/images/upload/<%= articles[1].avatar%>",
+                                title: "<%= articles[1].title %>",
+                                link: "/page/<%= articles[1]._id%>",
+                                text: `<%= articles[1].text.split(" ").slice(0, 10) %> ...`
                             }, {
-                                category: "graphic",
-                                image: "/images/Home/slide-1.jpg",
-                                title: "Wild <span>Romeo</span>",
-                                link: "#none",
-                                text: "Lorem ipsum Dolor in minim fugiat ut nisi occaecat fugiat. Lorem ipsum Quis tempor Ut enim officia deserunt consectetur."
+                                image: "/images/upload/<%= articles[2].avatar%>",
+                                title: "<%= articles[2].title %>",
+                                link: "/page/<%= articles[2]._id%>",
+                                text: `<%= articles[2].text.split(" ").slice(0, 10) %> ...`
                             }, {
-                                category: "video",
-                                image: "/images/Home/slide-1.jpg",
-                                title: "Strange <span>Dexter</span>",
-                                link: "#none",
-                                text: "Lorem ipsum Dolor in minim fugiat ut nisi occaecat fugiat. Lorem ipsum Quis tempor Ut enim officia deserunt consectetur."
+                                image: "/images/upload/<%= articles[3].avatar%>",
+                                title: "<%= articles[3].title %>",
+                                link: "/page/<%= articles[3]._id%>",
+                                text: `<%= articles[3].text.split(" ").slice(0, 10) %> ...`
                             }, {
-                                category: "branding",
-                                image: "/images/Home/slide-1.jpg",
-                                title: "Free <span>Sarah</span>",
-                                link: "#none",
-                                text: "Lorem ipsum Dolor in minim fugiat ut nisi occaecat fugiat. Lorem ipsum Quis tempor Ut enim officia deserunt consectetur."
+                                image: "/images/upload/<%= articles[4].avatar%>",
+                                title: "<%= articles[4].title %>",
+                                link: "/page/<%= articles[4]._id%>",
+                                text: `<%= articles[4].text.split(" ").slice(0, 10) %> ...`
                             }, {
-                                category: "printing",
-                                image: "/images/Home/slide-1.jpg",
-                                title: "Chico <span>Silly</span>",
-                                link: "#none",
-                                text: "Lorem ipsum Dolor in minim fugiat ut nisi occaecat fugiat. Lorem ipsum Quis tempor Ut enim officia deserunt consectetur."
+                                image: "/images/upload/<%= articles[5].avatar%>",
+                                title: "<%= articles[5].title %>",
+                                link: "/page/<%= articles[5]._id%>",
+                                text: `<%= articles[5].text.split(" ").slice(0, 10) %> ...`
                             }, {
-                                category: "printing",
-                                image: "/images/Home/slide-1.jpg",
-                                title: "IG <span>Shop</span>",
-                                link: "#none",
-                                text: "Lorem ipsum Dolor in minim fugiat ut nisi occaecat fugiat. Lorem ipsum Quis tempor Ut enim officia deserunt consectetur."
+                                image: "/images/upload/<%= articles[6].avatar%>",
+                                title: "<%= articles[6].title %>",
+                                link: "/page/<%= articles[6]._id%>",
+                                text: `<%= articles[6].text.split(" ").slice(0, 10) %> ...`
                             }, {
-                                category: "printing",
-                                image: "/images/Home/slide-1.jpg",
-                                title: "Tana <span>Samawa</span>",
-                                link: "#none",
-                                text: "Lorem ipsum Dolor in minim fugiat ut nisi occaecat fugiat. Lorem ipsum Quis tempor Ut enim officia deserunt consectetur."
+                                image: "/images/upload/<%= articles[7].avatar%>",
+                                title: "<%= articles[7].title %>",
+                                link: "/page/<%= articles[7]._id%>",
+                                text: `<%= articles[7].text.split(" ").slice(0, 10) %> ...`
                             }];
                         </script>
                     </div>
@@ -310,56 +300,112 @@
                     <div class="col-md-3 col-sm-6 text-center">
                         <div class="wrap animated" data-animate="fadeInDown">
                             <div class="img-team">
-                                <img src="/images/Home/slide-1.jpg" alt="" class="img-circle">
+                                <img src="/images/upload/<%= users[0].avatar %>" alt="" class="img-circle">
                             </div>
 
-                            <h3>John Doe</h3>
-                            <h5>Creative Director</h5>
+                            <h3>
+                                <%= users[0].name%>
+                            </h3>
+                            <h5>
+                                <%= users[0].username%>
+                            </h5>
 
-                            <p>Lorem ipsum Proident incididunt sint dolor cupidatat pariatur dolore magna pariatur in ea aliqua.
+                            <p>
+                                <%= users[0].phoneNumber %><br> <br>
+                                    <%= users[0].createAt.toString().slice(4,15) %>
                             </p>
+
+                            <div class="team-social" style="margin-top: -20px;">
+                                <ul class="list-inline social-list">
+                                    <li>
+                                        <a href="mailto:<%= users[0].email%>" class="fa fa-envelope"></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-sm-6 text-center">
                         <div class="wrap animated" data-animate="fadeInDown">
                             <div class="img-team">
-                                <img src="/images/Home/slide-1.jpg" alt="" class="img-circle">
+                                <img src="/images/upload/<%= users[1].avatar %>" alt="" class="img-circle">
                             </div>
 
-                            <h3>Ellie Morgan</h3>
-                            <h5>Designer</h5>
+                            <h3>
+                                <%= users[1].name%>
+                            </h3>
+                            <h5>
+                                <%= users[1].username%>
+                            </h5>
 
-                            <p>Lorem ipsum Proident incididunt sint dolor cupidatat pariatur dolore magna pariatur in ea aliqua.
+                            <p>
+                                <%= users[1].phoneNumber %><br> <br>
+                                    <%= users[1].createAt.toString().slice(4,15) %>
                             </p>
+
+                            <div class="team-social" style="margin-top: -20px;">
+                                <ul class="list-inline social-list">
+                                    <li>
+                                        <a href="mailto:<%= users[1].email%>" class="fa fa-envelope"></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-sm-6 text-center">
                         <div class="wrap animated" data-animate="fadeInDown">
                             <div class="img-team">
-                                <img src="/images/Home/slide-1.jpg" alt="" class="img-circle">
+                                <img src="/images/upload/<%= users[2].avatar %>" alt="" class="img-circle">
                             </div>
 
-                            <h3>Elche</h3>
-                            <h5>Developer</h5>
+                            <h3>
+                                <%= users[2].name%>
+                            </h3>
+                            <h5>
+                                <%= users[2].username%>
+                            </h5>
 
-                            <p>Lorem ipsum Proident incididunt sint dolor cupidatat pariatur dolore magna pariatur in ea aliqua.
+                            <p>
+                                <%= users[2].phoneNumber %><br> <br>
+                                    <%= users[2].createAt.toString().slice(4,15) %>
                             </p>
+
+                            <div class="team-social" style="margin-top: -20px;">
+                                <ul class="list-inline social-list">
+                                    <li>
+                                        <a href="mailto:<%= users[2].email%>" class="fa fa-envelope"></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-md-3 col-sm-6 text-center">
                         <div class="wrap animated" data-animate="fadeInDown">
                             <div class="img-team">
-                                <img src="/images/Home/slide-1.jpg" alt="" class="img-circle">
+                                <img src="/images/upload/<%= users[3].avatar %>" alt="" class="img-circle">
                             </div>
 
-                            <h3>JF Thiago</h3>
-                            <h5>Commerce</h5>
+                            <h3>
+                                <%= users[3].name%>
+                            </h3>
+                            <h5>
+                                <%= users[3].username%>
+                            </h5>
 
-                            <p>Lorem ipsum Proident incididunt sint dolor cupidatat pariatur dolore magna pariatur in ea aliqua.
+                            <p>
+                                <%= users[3].phoneNumber %><br> <br>
+                                    <%= users[3].createAt.toString().slice(4,15) %>
                             </p>
+
+                            <div class="team-social" style="margin-top: -20px;">
+                                <ul class="list-inline social-list">
+                                    <li>
+                                        <a href="mailto:<%= users[3].email%>" class="fa fa-envelope"></a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

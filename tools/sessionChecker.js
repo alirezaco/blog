@@ -7,8 +7,8 @@ function userChecker(req, res, next) {
 
 function loginChecker(req, res, next) {
     if (!req.cookies.userId || !req.session.user) {
-        res.location('//127.0.0.1:5000/')
-        return res.redirect('//127.0.0.1:5000/')
+        res.location('//127.0.0.1:5000/login')
+        return res.redirect('//127.0.0.1:5000/login')
     }
     next()
 }

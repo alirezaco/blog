@@ -38,7 +38,7 @@
             </div>
             <% if (admin) {%>
                 <div>
-                    <button class="btn btn-error m-5 md:m-0">Delete</button>
+                    <button class="btn btn-error m-5 md:m-0" onclick="deleteComment('<%= comment._id%>')">Delete</button>
                 </div>
                 <%}%>
         </div>

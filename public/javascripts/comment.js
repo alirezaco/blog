@@ -19,3 +19,16 @@ function saveComment(articleId) {
         }
     });
 }
+
+function deleteComment(id) {
+    $.ajax({
+        type: "DELETE",
+        url: "/comment/" + id,
+        success: function() {
+            result('Comment deleted !!!', 'success')
+        },
+        error: function() {
+            result('Comment not deleted !!!', 'error')
+        }
+    });
+}
