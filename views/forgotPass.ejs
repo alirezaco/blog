@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login</title>
+    <title>Forgot password</title>
     <link href="https://cdn.jsdelivr.net/npm/daisyui@0.11.x/dist/full.css" rel="stylesheet" type="text/css" />
     <link rel="shortcut icon" href="/icon/icon-blog-png-2.jpg" type="image/x-icon">
 </head>
@@ -18,7 +18,7 @@
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
                 </svg>
-                <label> Welcome !!!</label>
+                <label id="alert-success"> Welcome !!!</label>
             </div>
         </div>
         <div class="alert alert-error hidden" id="error">
@@ -34,24 +34,27 @@
         <div class="w-72 lg:w-96 md:w-80">
             <div class="text-center my-5">
                 <div>
-                    <h1 class="text-3xl text-gray-700 font-bold">Sign in your account</h1>
+                    <h1 class="text-3xl text-gray-700 font-bold">Forgot password</h1>
                 </div>
             </div>
             <div>
                 <div class="p-2 bg-blue-100 rounded-2xl">
                     <div class="form-control">
-                        <label class="label">
+                        <label class="label" style="margin-bottom: -10px;">
                             <span class="label-text">Username</span>
                         </label>
-                        <input type="text" id="username" placeholder="username" class="input input-bordered">
+                        <div>
+                            <input type="text" id="username" placeholder="username" class="input input-bordered" style="width: 78%; display: inline;">
+                            <button id="send" type="button" class="btn btn-wide btn-primary my-3" style="width: 20%; display: inline;">Send</button>
+                        </div>
                     </div>
-                    <div class="form-control">
+                    <div class="form-control my-2">
                         <label class="label">
-                            <span class="label-text">Password</span>
+                            <span class="label-text">Enter the number sent to your email</span>
                         </label>
-                        <input type="password" id="password" placeholder="Password" class="input input-bordered">
-                        <label class="label">
-                            <a href="/forgot" class="label-text-alt">Forgot Password?</a>
+                        <input type="password" id="Number" placeholder="Number" class="input input-bordered">
+                        <label class="label mt-2">
+                            <a href="/login" class="label-text-alt">Login</a>
                             <a href="/singUp" class="label-text-alt">Create a new account</a>
                         </label>
                     </div>
@@ -62,7 +65,7 @@
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-    <script src="./javascripts/logIn.js"></script>
+    <script src="/javascripts/forgot.js"></script>
 </body>
 
 </html>

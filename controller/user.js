@@ -83,4 +83,24 @@ function updateByAdmin(id) {
     })
 }
 
-module.exports = { findByUsername, createUser, deleteById, updateById, uploadAvatar, getAllUsers, updateByAdmin }
+//update password buy Username
+function updatePasswordBuyUsername(username, password) {
+    return new Promise((resolve, reject) => {
+
+        if (!(password.search(/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/gmi) + 1)) return reject('password incorrect!')
+
+        Users.findOneAndUpdate({ username }, { password }, { new: true }).then((user) => {
+
+            user.save();
+
+            resolve(user)
+
+        }).catch((err) => {
+
+            reject(err)
+
+        })
+    })
+}
+
+module.exports = { findByUsername, createUser, deleteById, updateById, uploadAvatar, getAllUsers, updateByAdmin, updatePasswordBuyUsername }
