@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const article = require('../controller/article')
 const upload = require('../tools/upload')
+const remove = require('../tools/delete')
 
 //create article
 router.post('/', upload.upload.single('img-article'), (req, res) => {
@@ -34,9 +35,14 @@ router.put('/:id', upload.upload.single('img-article'), (req, res) => {
 
 //delete article
 router.delete('/:id', (req, res) => {
-    article.deleteById(req.params.id).then((oldArticle) => {
-        if (oldArticle.avatar != 'no_photo.jpg') upload.deleteAvatar(oldArticle.avatar)
-        res.send('ok!!!')
+    remove.deleteCommentByArticleId(req.params.id).then(() => {
+
+        article.deleteById(req.params.id).then((oldArticle) => {
+            if (oldArticle.avatar != 'no_photo.jpg') upload.deleteAvatar(oldArticle.avatar)
+            res.send('ok!!!')
+        }).catch(() => {
+            res.status(404).send('Not found!!!')
+        })
     }).catch(() => {
         res.status(404).send('Not found!!!')
     })

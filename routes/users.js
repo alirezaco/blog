@@ -5,6 +5,7 @@ const router = express.Router();
 const bcrypt = require("bcrypt")
 const upload = require("../tools/upload") //upload file
 const acc = require("../tools/acc")
+const remove = require("../tools/delete")
 
 //include controller of models
 const controllerUser = require("../controller/user")
@@ -50,9 +51,20 @@ router.get("/logout", (req, res) => {
 
 //delete user
 router.delete("/", (req, res) => {
-    controllerUser.deleteById(req.session.user._id, (err) => {
-        if (err) return res.status(500).send("server Error!!!")
-        res.send("ok!!!")
+
+    remove.deleteAllArticleByUserId(req.session.user._id).then(() => {
+
+        remove.deleteCommentByUserId(req.session.user._id).then(() => {
+
+            controllerUser.deleteById(req.session.user._id, (err) => {
+                if (err) return res.status(500).send("server Error!!!")
+                res.send("ok!!!")
+            })
+        }).catch(() => {
+            res.status(500).send("server Error!!!")
+        })
+    }).catch(() => {
+        res.status(500).send("server Error!!!")
     })
 })
 
@@ -119,9 +131,20 @@ router.get('/all', acc.checkAdmin, (req, res) => {
 
 //delete user by  admin
 router.delete('/admin/:id', acc.checkAdmin, (req, res) => {
-    controllerUser.deleteById(req.params.id, (err) => {
-        if (err) res.status(500).send('error');
-        res.send('ok!')
+
+    remove.deleteAllArticleByUserId(req.params.id).then(() => {
+
+        remove.deleteCommentByUserId(req.params.id).then(() => {
+
+            controllerUser.deleteById(req.params.id, (err) => {
+                if (err) res.status(500).send('error');
+                res.send('ok!')
+            })
+        }).catch(() => {
+            res.status(500).send('error');
+        })
+    }).catch(() => {
+        res.status(500).send('error');
     })
 })
 
